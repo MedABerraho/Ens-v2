@@ -15,5 +15,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     @Modifying
     @Query(EnsConsts.UPDATE_EXPENSE)
     void updateExpense(@Param("expenseId") Long expenseId,@Param("expenseName")  String expenseName,
-                       @Param("amount")  Double amount,@Param("expenseType")  ExpenseType expenseType,@Param("bursary")  Bursarship bursary);
+                       @Param("amount")  Double amount,@Param("expenseType")  ExpenseType expenseType,
+                       @Param("bursar")  Bursarship bursarship);
 }

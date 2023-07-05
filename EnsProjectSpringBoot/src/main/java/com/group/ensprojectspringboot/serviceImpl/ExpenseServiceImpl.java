@@ -48,7 +48,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         try {
             if (jwtFilter.isAdmin()) {
                 if (isExpenseValid(request.get("expenseName"), request.get("expenseTypeId"), Double.valueOf(request.get("amount")),
-                        Long.valueOf(request.get("bursaryId")))) {
+                        Long.valueOf(request.get("bursarship")))) {
                     expenseRepository.save(getExpenseFromMap(request));
                     return EnsUtils.getResponseEntity("Expense is added Successfully!", HttpStatus.OK);
                 }
@@ -62,8 +62,8 @@ public class ExpenseServiceImpl implements ExpenseService {
         return EnsUtils.getResponseEntity(EnsConsts.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private boolean isExpenseValid(String expenseName, String expenseTypeId, Double amount, Long bursaryId) {
-        if (bursaryId == null)
+    private boolean isExpenseValid(String expenseName, String expenseTypeId, Double amount, Long bursarship) throws Exception {
+        if (bursarship == null)
             return false;
         if (expenseName == null || expenseName.isEmpty())
             return false;
@@ -71,17 +71,23 @@ public class ExpenseServiceImpl implements ExpenseService {
         if (expenseTypeId == null || expenseTypeId.isEmpty())
             return false;
 
-        if (amount <= getTotalBursaryAmount())
+        if (amount > getTotalBursaryAmount())
             return false;
         return true;
     }
 
-    private Double getTotalBursaryAmount() {
-        List<Bursarship> bursarships = (List<Bursarship>) bursarshipService.getBursary();
-        Double totalBursaryAmount = null;
-        for (Bursarship bursarship : bursarships) {
-            totalBursaryAmount += bursarship.getAmount();
+    private Double getTotalBursaryAmount() throws Exception {
+        ResponseEntity<List<Bursarship>> response = bursarshipService.getBursary();
+        List<Bursarship> bursarships = response.getBody();
+        Double totalBursaryAmount = Double.valueOf(0);
+        if (bursarships != null && !bursarships.isEmpty()) {
+            for (Bursarship bursarship : bursarships) {
+                totalBursaryAmount += bursarship.getAmount();
+            }
+        } else {
+            throw new Exception("The bursary body is null or empty");
         }
+
         return totalBursaryAmount;
     }
 
@@ -93,6 +99,9 @@ public class ExpenseServiceImpl implements ExpenseService {
         Optional<ExpenseType> expenseTypeOptional = expenseTypeRepository.findById(Long.valueOf(request.get("expenseTypeId")));
         ExpenseType expenseType = expenseTypeOptional.get();
         expense.setExpenseType(expenseType);
+        Optional<Bursarship> bursarshipOptional = bursarshipRepository.findById(Long.valueOf(request.get("bursarship")));
+        Bursarship bursarship = bursarshipOptional.get();
+        expense.setBursarship(bursarship);
         return expense;
     }
 

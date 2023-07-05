@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface SourceRepository extends JpaRepository<Source, Long> {
     @Modifying
     @Query(EnsConsts.UPDATE_SOURCE)
-    void updateProduct(@Param("sourceId") Long sourceId, @Param("sourceName") String sourceName, @Param("sourceDescription") String sourceDescription);
+    void updateSource(@Param("sourceId") Long sourceId, @Param("sourceName") String sourceName, @Param("sourceDescription") String sourceDescription);
 }

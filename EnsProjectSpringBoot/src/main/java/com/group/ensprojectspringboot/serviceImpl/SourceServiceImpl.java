@@ -99,7 +99,7 @@ public class SourceServiceImpl implements SourceService {
                     Optional<Source> sourceOptional = sourceRepository.findById(sourceId);
                     if (sourceOptional.isPresent()) {
                         Source source = getSourceFromMap(request);
-                        sourceRepository.updateProduct(sourceId, source.getSourceName(), source.getSourceDescription());
+                        sourceRepository.updateSource(sourceId, source.getSourceName(), source.getSourceDescription());
                         return EnsUtils.getResponseEntity("Source updated successfully", HttpStatus.OK);
                     } else {
                         return EnsUtils.getResponseEntity("Source does not exist!", HttpStatus.OK);
