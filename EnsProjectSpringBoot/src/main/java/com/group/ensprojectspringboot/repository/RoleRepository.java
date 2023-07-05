@@ -1,11 +1,12 @@
 package com.group.ensprojectspringboot.repository;
 
-import com.group.ensprojectspringboot.model.User;
+
+import com.group.ensprojectspringboot.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    User findByUsername(String username);
+    Role findByRoleName(String roleName);
 }

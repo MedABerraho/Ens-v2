@@ -5,7 +5,10 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 
 public interface UserService {
-    ResponseEntity<String> signUp(Map<String, String> request);
+
+    void initRoles();
+
+    ResponseEntity<String> registerNewUser(Map<String, String> request);
 
     ResponseEntity<String> login(Map<String, String> request);
 }

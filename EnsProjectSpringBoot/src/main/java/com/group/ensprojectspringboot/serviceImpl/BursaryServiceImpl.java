@@ -1,6 +1,6 @@
 package com.group.ensprojectspringboot.serviceImpl;
 
-import com.group.ensprojectspringboot.configuration.JwtFilter;
+import com.group.ensprojectspringboot.configuration.JwtRequestFilter;
 import com.group.ensprojectspringboot.consts.EnsConsts;
 import com.group.ensprojectspringboot.model.Bursarship;
 import com.group.ensprojectspringboot.model.Source;
@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.Optional;
 public class BursaryServiceImpl implements BursarshipService {
 
     @Autowired
-    JwtFilter jwtFilter;
+    JwtRequestFilter jwtFilter;
 
     @Autowired
     BursarshipRepository bursarshipRepository;

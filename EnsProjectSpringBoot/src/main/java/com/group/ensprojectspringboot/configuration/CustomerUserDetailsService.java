@@ -13,26 +13,24 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Objects;
 
-@Slf4j
 @Service
+@Slf4j
 public class CustomerUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepository userDAO;
 
     private User userDetails;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("Inside loadUserByUsername {}", username);
-        userDetails = userRepository.findByUsername(username);
+        userDetails = userDAO.findByUsername(username);
         if (!Objects.isNull(userDetails)) {
             return new org.springframework.security.core.userdetails.User(userDetails.getUsername(),
                     userDetails.getPassword(), new ArrayList<>());
         } else {
             throw new UsernameNotFoundException("User not found!");
         }
-
     }
 
     public User getUserDetails() {
@@ -40,4 +38,3 @@ public class CustomerUserDetailsService implements UserDetailsService {
     }
 
 }
-

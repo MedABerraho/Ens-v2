@@ -1,6 +1,6 @@
 package com.group.ensprojectspringboot.serviceImpl;
 
-import com.group.ensprojectspringboot.configuration.JwtFilter;
+import com.group.ensprojectspringboot.configuration.JwtRequestFilter;
 import com.group.ensprojectspringboot.consts.EnsConsts;
 import com.group.ensprojectspringboot.model.Bursarship;
 import com.group.ensprojectspringboot.model.Expense;
@@ -32,7 +32,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     ExpenseRepository expenseRepository;
 
     @Autowired
-    JwtFilter jwtFilter;
+    JwtRequestFilter jwtFilter;
 
     @Autowired
     BursarshipRepository bursarshipRepository;
