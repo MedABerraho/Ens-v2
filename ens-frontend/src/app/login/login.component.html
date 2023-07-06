@@ -1,11 +1,26 @@
-<div class="container mt-5">
-    <div class="card" style="padding: 20px;">
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-            <label for="username">Username</label>
-            <input class="form-control mb-3" type="text" ngModel name="userName" id="userName" placeholder="Enter your username">
-            <label for="username">Password</label>
-            <input class="form-control mb-3" type="password" ngModel name="userPassword" id="userPassword" placeholder="Enter your password">
-            <input class="btn btn-outline-primary form-control rounded-0"  type="submit" value="Login">
-        </form>
+<app-header></app-header>
+<div class="container " style="margin-top: 50px;">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Login</h4>
+            <form>
+              <div class="mb-3">
+                <label for="email" class="form-label">User name</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  
