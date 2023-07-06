@@ -1,6 +1,7 @@
 package com.group.ensprojectspringboot.serviceImpl;
 
-import com.group.ensprojectspringboot.configuration.JwtRequestFilter;
+
+import com.group.ensprojectspringboot.configuration.JwtFilter;
 import com.group.ensprojectspringboot.consts.EnsConsts;
 import com.group.ensprojectspringboot.model.Bursarship;
 import com.group.ensprojectspringboot.model.Source;
@@ -26,7 +27,7 @@ import java.util.Optional;
 public class BursaryServiceImpl implements BursarshipService {
 
     @Autowired
-    JwtRequestFilter jwtFilter;
+    JwtFilter jwtFilter;
 
     @Autowired
     BursarshipRepository bursarshipRepository;

@@ -1,6 +1,7 @@
 package com.group.ensprojectspringboot.serviceImpl;
 
-import com.group.ensprojectspringboot.configuration.JwtRequestFilter;
+
+import com.group.ensprojectspringboot.configuration.JwtFilter;
 import com.group.ensprojectspringboot.consts.EnsConsts;
 import com.group.ensprojectspringboot.model.Source;
 import com.group.ensprojectspringboot.repository.SourceRepository;
@@ -26,7 +27,7 @@ public class SourceServiceImpl implements SourceService {
     SourceRepository sourceRepository;
 
     @Autowired
-    JwtRequestFilter jwtFilter;
+    JwtFilter jwtFilter;
 
     @Override
     public ResponseEntity<String> createSource(Map<String, String> request) {

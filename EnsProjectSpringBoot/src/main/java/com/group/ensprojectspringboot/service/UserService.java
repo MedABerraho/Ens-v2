@@ -6,9 +6,10 @@ import java.util.Map;
 
 public interface UserService {
 
-    void initRoles();
 
-    ResponseEntity<String> registerNewUser(Map<String, String> request);
+    ResponseEntity<String> signUp(Map<String, String> requestMap);
 
-    ResponseEntity<String> login(Map<String, String> request);
+    ResponseEntity<String> login(Map<String, String> requestMap);
+
+    ResponseEntity<String> checkToken();
 }

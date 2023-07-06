@@ -13,53 +13,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @RestController
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    UserService userService;
 
-    @PostConstruct
-    public void initRoles() {
-        try{
-            userService.initRoles();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
-    @PostMapping({"/registerNewUser"})
-    public ResponseEntity<String> registerNewUser(@RequestBody Map<String, String> request) {
+    @PostMapping("/signup")
+    public ResponseEntity<String> signUp(@RequestBody(required = true) Map<String, String> requestMap) {
         try {
-            return userService.registerNewUser(request);
+            return userService.signUp(requestMap);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return EnsUtils.getResponseEntity(EnsConsts.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @PostMapping({"/login"})
-    public ResponseEntity<String> login(@RequestBody Map<String, String> request){
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<String> login(@RequestBody(required = true) Map<String, String> requestMap) {
         try {
-            return userService.login(request);
+            return userService.login(requestMap);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return EnsUtils.getResponseEntity(EnsConsts.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping({"/forAdmin"})
-    @PreAuthorize("hasRole('Admin')")
-    public String forAdmin() {
-        return "This URL is only accessible to admin";
-    }
-
-    @GetMapping({"/forUser"})
-    @PreAuthorize("hasAnyRole('Admin','User')")
-    public String forUser() {
-        return "This URL is only accessible to user";
+    @GetMapping(path = "/checkToken")
+    public ResponseEntity<String> checkToken() {
+        try {
+            return userService.checkToken();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return EnsUtils.getResponseEntity(EnsConsts.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
