@@ -32,15 +32,13 @@ public class SourceServiceImpl implements SourceService {
     @Override
     public ResponseEntity<String> createSource(Map<String, String> request) {
         try {
-            if (jwtFilter.isAdmin()) {
+
                 if (isSourceValid(request.get("sourceName"))) {
                     sourceRepository.save(getSourceFromMap(request));
                     return EnsUtils.getResponseEntity("Source is added Successfully!", HttpStatus.OK);
                 }
                 return EnsUtils.getResponseEntity(EnsConsts.INVALID_DATA, HttpStatus.OK);
-            } else {
-                return EnsUtils.getResponseEntity(EnsConsts.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

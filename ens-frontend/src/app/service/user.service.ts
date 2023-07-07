@@ -10,13 +10,13 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  login(data: any) {
+  login(data: any): Observable<any> {
     return this.httpClient.post(this.baseUrl + "/user/login", data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     })
   }
 
-  signup(data: any) {
+  signup(data: any): Observable<any> {
     return this.httpClient.post(this.baseUrl + "/user/signup", data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     })

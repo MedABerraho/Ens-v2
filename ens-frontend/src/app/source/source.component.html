@@ -1,0 +1,23 @@
+<div class="page-container">
+    <app-header></app-header>
+    <div class="col-md-6 offset-md-3" style="margin-top: 50px;">
+        <h3> Ajouter une source </h3>
+        <form (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label> Source Name</label>
+                <input type="text" class="form-control" id="sourceName" [(ngModel)]="source.sourceName"
+                    name="sourceName">
+            </div>
+
+            <div class="form-group">
+                <label> Source Description</label>
+                <input type="text" class="form-control" id="sourceDescription" [(ngModel)]="source.sourceDescription" name="sourceDescription">
+            </div>
+
+            <button class="btn btn-success" type="submit">Ajouter</button>
+
+        </form>
+    </div>
+    <app-footer></app-footer>
+</div>
